@@ -1,5 +1,3 @@
-- name: Main Page
-  href: index.md
 - name: Documentation
   href: docsrc/
   homepage: docsrc/index.md
