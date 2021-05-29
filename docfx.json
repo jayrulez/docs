@@ -37,7 +37,9 @@
     "dest": "docs",
 	"globalMetadata": {
 		"_appLogoPath": "assets/images/EZ-text.svg",
-		"_enableSearch": true
+		"_appFaviconPath": "assets/images/favicon.svg",
+		"_enableSearch": true,
+		"_enableGoogleAnalytics": true
 	},
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
