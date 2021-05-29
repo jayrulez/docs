@@ -35,6 +35,10 @@
     "overwrite": [
     ],
     "dest": "docs",
+	"globalMetadata": {
+		"_appLogoPath": "assets/images/EZ-text.svg",
+		"_enableSearch": true
+	},
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
