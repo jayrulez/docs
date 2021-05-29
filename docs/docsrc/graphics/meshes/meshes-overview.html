@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Meshes </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Meshes ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+        	<div class="navbar-header">
+        	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        		<span class="sr-only">Toggle navigation</span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+        	  </button>
+        	  
+        	  <a class="navbar-brand" href="/" style="padding-right: 10px;">
+        		<img src="/assets/images/EZ-text.svg" alt="ezEngine" height="50" width="100">
+        	  </a>
+        	</div>
+        	<div class="collapse navbar-collapse" id="navbar">
+        	  <form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        		  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        	  </form>
+        	</div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="meshes">Meshes</h1>
+
+<p>Meshes are the central feature of any 3D engine. Meshes can be separated into two kinds: the ones used for rendering, and the ones used for interactions (<a href="../../physics/physx-overview.html">physics</a>).</p>
+<p>Mesh data is either <a href="../../assets/import-assets.html">imported</a> from external files, such as FBX files, or procedurally generated. Generating meshes procedurally is mostly useful for very basic shapes either for special cases or as placeholders during early development.</p>
+<p>Graphical meshes are handled by the <a href="mesh-asset.html">mesh asset</a>. Meshes that are used in physics simulations are called <a href="../../physics/collision-shapes/collision-meshes.html">collision meshes</a>.</p>
+<p>Once a mesh is imported as an <a href="../../assets/assets-overview.html">asset</a>, it can be placed in a scene as often as you like. For the most common use case you would use a <a href="mesh-component.html">mesh component</a> to do so, but there are other components for special cases, such as the <a href="instanced-mesh-component.html">instanced mesh component</a>. Meshes may also be used by other things, for example as a <a href="../../effects/particle-effects/particle-renderers.html#mesh-renderer">type of particle</a>. To instantiate collision meshes, you need to use the proper <a href="../../physics/collision-shapes/physx-shapes.html">shape component</a>.</p>
+<p>Graphical meshes reference <a href="../../materials/materials-overview.html">materials</a> which define how the mesh gets rendered. Collision meshes may use <a href="../../materials/surfaces.html">surfaces</a> to set their physical properties.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../../index.html">Back to Index</a></li>
+<li><a href="../../materials/materials-overview.html">Materials</a></li>
+<li><a href="../../materials/surfaces.html">Surfaces</a></li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/jayrulez/docs/blob/docfx/docsrc/graphics/meshes/meshes-overview.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

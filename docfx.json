@@ -1,0 +1,51 @@
+{
+  "metadata": [
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "docsrc/**/*.md",
+          "docsrc/toc.md",
+          "toc.yml",
+          "*.md"
+        ]
+      },
+      {
+        "files": [
+          "screenshots/*.md"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "assets/**",
+          "docsrc/media/media/**",
+          "docsrc/**/media/**"
+        ]
+      },
+      {
+        "files": [
+          "screenshots/*.webm",
+          "screenshots/*.mp4"
+        ]
+      }
+    ],
+    "overwrite": [
+    ],
+    "dest": "docs",
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": [
+      "default",
+	  "template"
+    ],
+    "postProcessors": [],
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false
+  }
+}

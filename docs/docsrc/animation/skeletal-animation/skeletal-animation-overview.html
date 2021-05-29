@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Skeletal Animations </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Skeletal Animations ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+        	<div class="navbar-header">
+        	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        		<span class="sr-only">Toggle navigation</span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+        	  </button>
+        	  
+        	  <a class="navbar-brand" href="/" style="padding-right: 10px;">
+        		<img src="/assets/images/EZ-text.svg" alt="ezEngine" height="50" width="100">
+        	  </a>
+        	</div>
+        	<div class="collapse navbar-collapse" id="navbar">
+        	  <form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        		  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        	  </form>
+        	</div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="skeletal-animations">Skeletal Animations</h1>
+
+<p><video src="../media/skeletal-anim.webm" width="500" height="500" autoplay="" loop=""></video></p>
+<p>Skeletal animation is being worked on, but so far only a very rudimentary feature set is available. Nevertheless, since this is an often asked about topic, this page describes how to use the existing functionality, so that you see what functionality is there, and also what is currently missing.</p>
+<p>Since this is all heavily work-in-progress, even the functionality that already exists is subject to change, and is not guaranteed to work at all.</p>
+<h2 id="sample-scene">Sample Scene</h2>
+<p>For a sample scene to look at, open the <strong>Animation</strong> scene from the <a href="../../samples/testing-chambers.html">Testing Chambers</a> project.</p>
+<h2 id="the-animation-system-pieces">The Animation System Pieces</h2>
+<p>The following elements are involved to make an animated mesh:</p>
+<h3 id="animated-mesh-asset">Animated Mesh Asset</h3>
+<p>The <em>animated mesh</em> <a href="../../assets/assets-overview.html">asset</a> represents the mesh of the animated object. This is a special version of the <a href="../../graphics/meshes/mesh-asset.html">mesh asset</a>. It works mostly the same way, except that it adds the necessary skinning information. Consequently, only these kinds of meshes can be used for skeletal animation. An animated mesh asset (currently) requires you to specify a <strong>default skeleton</strong> asset, otherwise it won't even transform the data.</p>
+<h3 id="skeleton-asset">Skeleton Asset</h3>
+<p>The <em>skeleton</em> asset stores the bone hierarchy of the animated object. This is also where you configure the overall scaling and which direction should be the forward, right and up vector of the imported model. In the future the skeleton asset is also supposed to be used to set up physics collision shapes, but this is currently not yet implemented.</p>
+<h3 id="animation-clip-asset">Animation Clip Asset</h3>
+<p>The <em>animation clip</em> asset represents <strong>a single animation</strong>, such as a walk or a jump animation. You may have multiple animations stored in a single <code>.fbx</code> or <code>.glb</code> file, but you need to create one animation clip asset for each animation that you want to import into EZ. Just reference the same source file each time. The animation clip asset has a property <code>UseAnimationClip</code> through which you can choose which animation to extract from the source file. Currently you have to <strong>type</strong> the name of the animation. The <em>Available Clips</em> list just below it shows you which animations have been found in the file.</p>
+<p><img src="../media/anim-clip-properties.png" alt="Anim clip properties"></p>
+<p>Additionally, in case all animations are in one large clip, you can use the <code>FirstFrame</code> and <code>NumFrames</code> properties to extract only a subset of the animation. This allows you to import the same source file many times, each time extracting only a specific range as a single clip.</p>
+<p>The <em>root motion</em> properties are meant for enabling an animation clip to move an animated character (ie. the actual character controller that sits on top of the animated mesh), however this is currently in the more experimental part of the code, so just ignore this.</p>
+<p>The <em>event track</em> property allows you to add markers to the clip, that indicate what happens at what time in the clip. This can be used to indicate when a foot touches the ground, or at what point in the animation a weapon fires. Using this information, the game logic could react by, for example, spawning an effect. At the moment the event track is exposed as raw data, this is supposed to have a nice UI later on. For the time being you have to set the <em>tick</em> and the name of the event manually. There are <strong>4800 ticks per second</strong>. That means if you want to add an event 2.5 seconds into the animation, you have to place it at tick 12000.</p>
+<p>Animation events are sent as <a href="../../runtime/world/world-messaging.html#event-messages">event messages</a> and therefore can only be captured by <em>event handler components</em> such as <a href="../../custom-code/visual-script/visual-script-overview.html">visual scripts</a> or <a href="../../custom-code/typescript/typescript-overview.html">TypeScript components</a>.</p>
+<h3 id="animated-mesh-component-and-simple-animation-component">Animated Mesh Component and Simple Animation Component</h3>
+<p>Once you have an animated mesh asset, a skeleton asset and an animation clip asset all set up, you can create an animated object in a scene by attaching an <em>Animated Mesh Component</em> and a <em>Simple Animation Component</em> to a game object like so:</p>
+<p><img src="../media/anim-setup.png" alt="Animation configuration"></p>
+<p>Here we have also attached a visual script to react to events in the animation clip, but that is entirely optional. When you press play, the editor will play back the animation on the mesh.</p>
+<h2 id="how-to-import-an-animated-mesh">How to Import an Animated Mesh</h2>
+<p>To import an animated object, you need to set up multiple assets (the mesh, the skeleton, the animation clips). The easiest way is to press <strong>CTRL+I</strong> to open the <a href="../../assets/import-assets.html">asset import dialog</a>. Select your <code>.fbx</code> or <code>.glb</code> file and choose to import it as multiple asset types like so:</p>
+<p><img src="../media/anim-import.png" alt="Animation import"></p>
+<p>This will create all three necessary asset types. You can repeat this process, if you want to import multiple animation clips (select <em>No Import</em> for the other asset types then). You'll need to change the filename for each additional animation clip asset.</p>
+<h2 id="animation-utility-components">Animation Utility Components</h2>
+<p>The following components are currently available:</p>
+<h3 id="joint-attachment-component">Joint Attachment Component</h3>
+<p>If you put a child object under an object with an animated mesh component, and attach a <em>Joint Attachment Component</em>, the animation system will take control over that object's position. With the <strong>JointName</strong> property you specify a bone that you are interested in (see the skeleton asset, if you need to know what bones are available). Every game tick, the animation system will then move that game object to the position of the animated bone. This allows you to have game objects move in sync with the animation. This can be used to put an object into the hand of a creature, or to have an effect follow the animation.</p>
+<p>In the sample scene this is used to place an object at the (animated) front of the turret's barrel, such that the projectile will be spawned at the proper position.</p>
+<h3 id="joint-override-component">Joint Override Component</h3>
+<p>This component is the opposite to the <em>Joint Attachment Component</em>. It works similar in that it has to be attached to a child object of an animated mesh and you have to type in the name of a bone. However, it will then <em>override</em> the specified <strong>bone's local transform</strong> with its <strong>own local transform</strong>. The idea here is, that game code can use this game object as a controller to steer the animated object. So for example your turret might be one complex animated object, with many bones but somewhere in the bone hierarchy there is one bone that controls the turrets aim (up/down or left/right or both). You want cool animations to &quot;unfold&quot; the turret when it is built and all sorts of other animations that are only possible with proper skeletal animation, but once the game runs you also want to procedurally control where the turret is aiming. Using this component you can take control of certain bones and drive their animation yourself.</p>
+<p>In the sample scene there are two objects for each turret that override two bones: one for left/right rotation and one for pointing up/down. You can manually modify these values from the property grid, while the editor is in play mode, to control the turrets aim. Note how the recoil animation continues to play properly relative to the turret's main direction.</p>
+<h2 id="how-to-use-this-system">How to use this System</h2>
+<p>The honest / short answer is: don't</p>
+<p>The features described above are MOSTLY what's there at the moment, and as you can imagine it is quite limited what you can achieve with that. You can basically play a single animation on a mesh. You could (probably) switch the active animation clip and use the speed controller to pause/resume animations, but if you build a character with that, it will be very choppy. The best thing you can do with it at the moment is environmental art, where you have animated objects in a scene that just loop something or play an animation when the player comes close. Maybe it's sufficient to build a tower-defense game :D</p>
+<h2 id="future-work">Future Work</h2>
+<p>There is ongoing work to build a way more sophisticated system to blend animations, transition from one animation to the next and so on. However, this is in a very early stage of development.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../../index.html">Back to Index</a></li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/jayrulez/docs/blob/docfx/docsrc/animation/skeletal-animation/skeletal-animation-overview.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+- name: Main Page
+  href: index.md
+- name: Documentation
+  href: docsrc/
+  homepage: docsrc/index.md
+- name: Screenshots
+#  href: screenshots/
+  homepage: screenshots/index.md
+- name: Contact
+  homepage: docsrc/getting-started/contact.md
+- name: Releases
+  homepage: docsrc/releases/releases.md
+- name: Github
+  href: https://github.com/ezEngine/ezEngine
