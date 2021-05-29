@@ -12,17 +12,6 @@
           "hash": "ooYhmqxUxxrd3ylAAy3gL0T33vyMZXxdBIBmpIe4Dqg="
         }
       },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "assets/css/style.scss",
-      "output": {
-        "resource": {
-          "relative_path": "assets/css/style.scss"
-        }
-      },
       "is_incremental": false,
       "version": ""
     },
@@ -5661,7 +5650,7 @@
           "hash": "xoP3oeZmfEx81dyZUVXJyLqsfYVviMCXAvzoqxpqAhg="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5695,7 +5684,7 @@
           "hash": "aDTKHnkJZuibqkXL/7QhaqhPxvdjn7pPtlTXzS2Ovv8="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -5704,7 +5693,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "qnTKW1GVfPrB5UZegH4unrOwjL1FD7DyUW6rseKCAHE="
+          "hash": "l7XBcMdEe5IUWxRIp7hNPP8FSi7qHIWBUlHlyTC0yQY="
         }
       },
       "is_incremental": false,
